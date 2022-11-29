@@ -1,11 +1,15 @@
 package com.nanlabs.trellomanagement.model.TO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class IssueTO extends CardTO {
 
+    @JsonProperty("name")
     private String title;
+    @JsonProperty("desc")
     private String description;
 
 

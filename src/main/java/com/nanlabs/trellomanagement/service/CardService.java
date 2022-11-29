@@ -28,13 +28,12 @@ public class CardService<T> {
     TrelloClient client;
 
     public void insertCard(T card) {
-        getBoardsIds();
         CardTO request = cardFactory.getCard(card);
-        System.out.println(request);
+        client.insertCard(request, getBoardsIds().get(0).getId(), key, token);
     }
 
-    public void getBoardsIds(){
+    public List<CardList> getBoardsIds(){
         List<CardList> idList = client.getIdsBoards(boardId, key, token);
-        System.out.println(idList);
+        return  idList;
     }
 }
