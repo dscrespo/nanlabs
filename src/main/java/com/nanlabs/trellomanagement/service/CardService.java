@@ -29,11 +29,28 @@ public class CardService<T> {
 
     public void insertCard(T card) {
         CardTO request = cardFactory.getCard(card);
-        client.insertCard(request, getBoardsIds().get(0).getId(), key, token);
+        String idList = getIdListFromType(request.type);
+        client.insertCard(request, idList, key, token);
     }
 
-    public List<CardList> getBoardsIds(){
+    private String getIdListFromType(String type){
+        // Por ahora no se me ocurrio nada mejor que preguntar por el tipo
+        // y asignarle un idList
+        String idList ="";
+        if(type.toLowerCase().equals("issue")){
+            idList = getBoardsIds().stream().filter(x -> x.getName().equals("To Do")).findFirst().get().getId();
+        }
+        if(type.toLowerCase().equals("bug")){
+            idList = getBoardsIds().stream().filter(x -> x.getName().equals("Bug")).findFirst().get().getId();
+        }
+        if(type.toLowerCase().equals("task")){
+            idList = getBoardsIds().stream().filter(x -> x.getName().equals("Task")).findFirst().get().getId();
+        }
+        return idList;
+    }
+    private List<CardList> getBoardsIds(){
         List<CardList> idList = client.getIdsBoards(boardId, key, token);
         return  idList;
     }
+
 }
