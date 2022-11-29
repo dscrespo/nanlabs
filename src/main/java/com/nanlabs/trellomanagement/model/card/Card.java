@@ -1,9 +1,32 @@
 package com.nanlabs.trellomanagement.model.card;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+public class Card {
 
-public abstract class Card {
-    public String type;
-    abstract boolean validArguments(Map arguments);
+    private String idList;
+    private String desc;
+    private String name;
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIdList() {
+        return idList;
+    }
+
+    public void setIdList(String idList) {
+        this.idList = idList;
+    }
 }

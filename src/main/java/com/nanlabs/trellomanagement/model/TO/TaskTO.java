@@ -1,6 +1,6 @@
-package com.nanlabs.trellomanagement.model.card;
+package com.nanlabs.trellomanagement.model.TO;
 
-public class Task {
+public class TaskTO {
     private String title;
     private String category;
 

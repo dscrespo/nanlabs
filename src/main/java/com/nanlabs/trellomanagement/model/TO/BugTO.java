@@ -1,44 +1,34 @@
-package com.nanlabs.trellomanagement.model.card;
+package com.nanlabs.trellomanagement.model.TO;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Issue extends Card{
+public class BugTO extends CardTO {
 
-    private String title;
     private String description;
-
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getDescription() {
         return description;
     }
 
+    private BugTO(){};
+
     public void setDescription(String description) {
         this.description = description;
     }
-    private Issue(){};
 
-    public Issue(LinkedHashMap param){
+    public BugTO(LinkedHashMap param){
         if(validArguments(param)){
         this.type = param.get("type").toString();
-        this.title = param.get("title").toString();
         this.description = param.get("description").toString();
         } else {
-            throw new IllegalArgumentException("no se puede crear un Issue ");
+            throw new IllegalArgumentException("no se puede crear un Bug ");
         }
     }
 
     @Override
     boolean validArguments(Map arguments) {
-        if(arguments.get("type") != null &&  arguments.get("title") != null && arguments.get("description") != null){
+        if(arguments.get("type") != null &&  arguments.get("description") != null){
             return true;
         } else {
             return false;

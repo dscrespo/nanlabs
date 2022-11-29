@@ -1,10 +1,8 @@
 package com.nanlabs.trellomanagement.service;
 
-import com.nanlabs.trellomanagement.model.card.Bug;
-import com.nanlabs.trellomanagement.model.card.Card;
-import com.nanlabs.trellomanagement.model.card.Issue;
-import com.nanlabs.trellomanagement.model.card.Task;
-import org.springframework.beans.BeanUtils;
+import com.nanlabs.trellomanagement.model.TO.BugTO;
+import com.nanlabs.trellomanagement.model.TO.CardTO;
+import com.nanlabs.trellomanagement.model.TO.IssueTO;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedHashMap;
@@ -13,13 +11,13 @@ import java.util.LinkedHashMap;
 public class CardFactory<T> {
 
 
-    public Card getCard(T card) {
+    public CardTO getCard(T card) {
         LinkedHashMap request = (LinkedHashMap) card;
         switch (request.get("type").toString()) {
             case "issue":
-                return new Issue(request);
+                return new IssueTO(request);
             case "bug":
-                return new Bug(request);
+                return new BugTO(request);
             default:
                 throw new UnsupportedOperationException();
         }
