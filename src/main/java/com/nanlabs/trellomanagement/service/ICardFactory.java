@@ -1,8 +1,8 @@
 package com.nanlabs.trellomanagement.service;
 
-import com.nanlabs.trellomanagement.model.card.Card;
+import com.nanlabs.trellomanagement.model.TO.CardTO;
 
 public interface ICardFactory<T> {
 
-    public Card getCard(T card);
+    public CardTO getCard(T card);
 }
