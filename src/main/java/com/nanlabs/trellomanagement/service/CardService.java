@@ -7,6 +7,7 @@ import com.nanlabs.trellomanagement.model.TO.TaskTO;
 import com.nanlabs.trellomanagement.model.card.Card;
 import com.nanlabs.trellomanagement.model.card.CardList;
 import com.nanlabs.trellomanagement.service.cardfactory.CardFactory;
+import com.nanlabs.trellomanagement.service.cardfactory.ICardFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class CardService<T> {
     private String boardId;
 
     @Autowired
-    CardFactory cardFactory;
+    ICardFactory cardFactory;
 
     @Autowired
     TrelloClient client;

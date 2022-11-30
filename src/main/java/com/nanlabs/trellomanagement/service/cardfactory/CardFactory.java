@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.LinkedHashMap;
 
 @Component
-public class CardFactory<T> {
+public class CardFactory<T> implements  ICardFactory<T>{
 
-
+    @Override
     public CardTO getCard(T card) {
         LinkedHashMap request = (LinkedHashMap) card;
         switch (request.get("type").toString().toLowerCase()) {
@@ -25,4 +25,6 @@ public class CardFactory<T> {
                 throw new UnsupportedOperationException("no existe el type: " + request.get("type").toString().toLowerCase());
         }
     }
+
+
 }
