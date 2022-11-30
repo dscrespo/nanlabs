@@ -4,7 +4,6 @@ import com.nanlabs.trellomanagement.model.TO.BugTO;
 import com.nanlabs.trellomanagement.model.TO.CardTO;
 import com.nanlabs.trellomanagement.model.TO.IssueTO;
 import com.nanlabs.trellomanagement.model.TO.TaskTO;
-import com.nanlabs.trellomanagement.service.CardService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -13,9 +12,7 @@ import org.mockito.InjectMocks;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

@@ -2,11 +2,13 @@ package com.nanlabs.trellomanagement.service;
 
 import com.nanlabs.trellomanagement.client.TrelloClient;
 import com.nanlabs.trellomanagement.service.cardfactory.CardFactory;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+@Disabled
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CardServiceTest {
 
@@ -21,12 +23,13 @@ public class CardServiceTest {
 
 
     @Test
-    public void when_triesGetActiveAccountInARSCurrency_but_clientAccountDetailFails_then_throwsException() {
+    public void when_insertABugCard__then_invokesInsertCard() {
 
-       /* BusinessException exception = assertThrows(BusinessException.class, () ->
-                service.getActiveAccountInARSCurrency(DOCUMENT_TYPE_CUIL, DOCUMENT_NUMBER));
+    }
 
-        assertEquals("An error occurred while getting client account detail", exception.getMessage());*/
+    @Test
+    public void when_insertATaskCard__then_invokesInsertCardAndCreateLabelOnCard() {
+
     }
 
 
