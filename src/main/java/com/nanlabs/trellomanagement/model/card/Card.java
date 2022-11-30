@@ -5,6 +5,15 @@ public class Card {
     private String idList;
     private String desc;
     private String name;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getDesc() {
         return desc;

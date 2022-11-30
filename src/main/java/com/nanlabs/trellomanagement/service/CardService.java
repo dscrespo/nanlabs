@@ -2,6 +2,9 @@ package com.nanlabs.trellomanagement.service;
 
 import com.nanlabs.trellomanagement.client.TrelloClient;
 import com.nanlabs.trellomanagement.model.TO.CardTO;
+import com.nanlabs.trellomanagement.model.TO.Labels;
+import com.nanlabs.trellomanagement.model.TO.TaskTO;
+import com.nanlabs.trellomanagement.model.card.Card;
 import com.nanlabs.trellomanagement.model.card.CardList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +33,11 @@ public class CardService<T> {
     public void insertCard(T card) {
         CardTO request = cardFactory.getCard(card);
         String idList = getIdListFromType(request.type);
-        client.insertCard(request, idList, key, token);
+        Card cardResponse = client.insertCard(request, idList, key, token);
+        if(request instanceof TaskTO){
+            client.createLabelOnCard(cardResponse.getId(), Labels.valueOf(((TaskTO) request).getCategory().toUpperCase()).label,
+                                     ((TaskTO) request).getCategory(), key, token);
+        }
     }
 
     private String getIdListFromType(String type){
