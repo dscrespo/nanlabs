@@ -6,6 +6,7 @@ import com.nanlabs.trellomanagement.model.TO.Labels;
 import com.nanlabs.trellomanagement.model.TO.TaskTO;
 import com.nanlabs.trellomanagement.model.card.Card;
 import com.nanlabs.trellomanagement.model.card.CardList;
+import com.nanlabs.trellomanagement.service.cardfactory.CardFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

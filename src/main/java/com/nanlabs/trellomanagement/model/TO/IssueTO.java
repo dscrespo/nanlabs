@@ -36,7 +36,7 @@ public class IssueTO extends CardTO {
         this.title = param.get("title").toString();
         this.description = param.get("description").toString();
         } else {
-            throw new IllegalArgumentException("no se puede crear un Issue ");
+            throw new IllegalArgumentException("no se puede crear un Issue");
         }
     }
 
