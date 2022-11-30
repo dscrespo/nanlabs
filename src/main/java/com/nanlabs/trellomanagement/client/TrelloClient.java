@@ -1,12 +1,10 @@
 package com.nanlabs.trellomanagement.client;
 
 import com.nanlabs.trellomanagement.model.TO.CardTO;
+import com.nanlabs.trellomanagement.model.card.Card;
 import com.nanlabs.trellomanagement.model.card.CardList;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +14,18 @@ import java.util.List;
 public interface TrelloClient {
 
     @PostMapping(path = "/card/")
-    void insertCard(CardTO card);
+    Card insertCard(@RequestBody final CardTO card,
+                    final @RequestParam String idList,
+                    final @RequestParam String key,
+                    final@RequestParam String token );
+
+    @PostMapping(path = "/card/{idCard}/labels")
+    void createLabelOnCard(final @PathVariable String idCard,
+                           final @RequestParam String color,
+                           final @RequestParam String name,
+                           final @RequestParam String key,
+                           final@RequestParam String token);
+
 
     @GetMapping(path = "/boards/{boardId}/lists")
     List<CardList> getIdsBoards(final @PathVariable String boardId,

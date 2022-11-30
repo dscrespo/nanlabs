@@ -2,6 +2,9 @@ package com.nanlabs.trellomanagement.service;
 
 import com.nanlabs.trellomanagement.client.TrelloClient;
 import com.nanlabs.trellomanagement.model.TO.CardTO;
+import com.nanlabs.trellomanagement.model.TO.Labels;
+import com.nanlabs.trellomanagement.model.TO.TaskTO;
+import com.nanlabs.trellomanagement.model.card.Card;
 import com.nanlabs.trellomanagement.model.card.CardList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,13 +31,33 @@ public class CardService<T> {
     TrelloClient client;
 
     public void insertCard(T card) {
-        getBoardsIds();
         CardTO request = cardFactory.getCard(card);
-        System.out.println(request);
+        String idList = getIdListFromType(request.type);
+        Card cardResponse = client.insertCard(request, idList, key, token);
+        if(request instanceof TaskTO){
+            client.createLabelOnCard(cardResponse.getId(), Labels.valueOf(((TaskTO) request).getCategory().toUpperCase()).label,
+                                     ((TaskTO) request).getCategory(), key, token);
+        }
     }
 
-    public void getBoardsIds(){
-        List<CardList> idList = client.getIdsBoards(boardId, key, token);
-        System.out.println(idList);
+    private String getIdListFromType(String type){
+        // Por ahora no se me ocurrio nada mejor que preguntar por el tipo
+        // y asignarle un idList
+        String idList ="";
+        if(type.toLowerCase().equals("issue")){
+            idList = getBoardsIds().stream().filter(x -> x.getName().equals("To Do")).findFirst().get().getId();
+        }
+        if(type.toLowerCase().equals("bug")){
+            idList = getBoardsIds().stream().filter(x -> x.getName().equals("Bug")).findFirst().get().getId();
+        }
+        if(type.toLowerCase().equals("task")){
+            idList = getBoardsIds().stream().filter(x -> x.getName().equals("Task")).findFirst().get().getId();
+        }
+        return idList;
     }
+    private List<CardList> getBoardsIds(){
+        List<CardList> idList = client.getIdsBoards(boardId, key, token);
+        return  idList;
+    }
+
 }

@@ -1,10 +1,16 @@
 package com.nanlabs.trellomanagement.model.TO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.nanlabs.trellomanagement.utils.Utils;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class BugTO extends CardTO {
 
+    @JsonProperty("name")
+    private String title;
+    @JsonProperty("desc")
     private String description;
 
     public String getDescription() {
@@ -21,6 +27,7 @@ public class BugTO extends CardTO {
         if(validArguments(param)){
         this.type = param.get("type").toString();
         this.description = param.get("description").toString();
+        this.title = "bug" + "-" + Utils.generateRandomWord() + "-" + Utils.generateRandomNumber();
         } else {
             throw new IllegalArgumentException("no se puede crear un Bug ");
         }
