@@ -1,4 +1,4 @@
-package com.nanlabs.trellomanagement.service;
+package com.nanlabs.trellomanagement.service.cardfactory;
 
 import com.nanlabs.trellomanagement.model.TO.CardTO;
 
