@@ -22,7 +22,7 @@ public class CardFactory<T> {
             case "task":
                 return new TaskTO(request);
             default:
-                throw new UnsupportedOperationException();
+                throw new UnsupportedOperationException("no existe el type: " + request.get("type").toString().toLowerCase());
         }
     }
 }
