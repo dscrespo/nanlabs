@@ -1,6 +1,6 @@
 package com.nanlabs.trellomanagement.model.card;
 
-public class CardList {
+public class CardTrelloBoardListId {
 
     private String id;
     private String name;

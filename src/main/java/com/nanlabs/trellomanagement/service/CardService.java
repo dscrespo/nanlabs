@@ -5,8 +5,8 @@ import com.nanlabs.trellomanagement.model.TO.CardTO;
 import com.nanlabs.trellomanagement.model.TO.Labels;
 import com.nanlabs.trellomanagement.model.TO.TaskTO;
 import com.nanlabs.trellomanagement.model.card.Card;
-import com.nanlabs.trellomanagement.model.card.CardList;
-import com.nanlabs.trellomanagement.service.cardfactory.CardFactory;
+import com.nanlabs.trellomanagement.model.card.CardTask;
+import com.nanlabs.trellomanagement.model.card.CardTrelloBoardListId;
 import com.nanlabs.trellomanagement.service.cardfactory.ICardFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,12 +33,12 @@ public class CardService<T> {
     TrelloClient client;
 
     public void insertCard(T card) {
-        CardTO request = cardFactory.getCard(card);
-        String idList = getIdListFromType(request.type);
+        Card request = cardFactory.getCard(card);
+        String idList = getIdListFromType(request.getType());
         Card cardResponse = client.insertCard(request, idList, key, token);
-        if(request instanceof TaskTO){
-            client.createLabelOnCard(cardResponse.getId(), Labels.valueOf(((TaskTO) request).getCategory().toUpperCase()).label,
-                                     ((TaskTO) request).getCategory(), key, token);
+        if(request instanceof CardTask){
+            client.createLabelOnCard(cardResponse.getId(), Labels.valueOf(((CardTask) request).getCategory().toUpperCase()).label,
+                                     ((CardTask) request).getCategory(), key, token);
         }
     }
 
@@ -57,8 +57,8 @@ public class CardService<T> {
         }
         return idList;
     }
-    private List<CardList> getBoardsIds(){
-        List<CardList> idList = client.getIdsBoards(boardId, key, token);
+    private List<CardTrelloBoardListId> getBoardsIds(){
+        List<CardTrelloBoardListId> idList = client.getIdsBoards(boardId, key, token);
         return  idList;
     }
 

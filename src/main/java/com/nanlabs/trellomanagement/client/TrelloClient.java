@@ -2,7 +2,7 @@ package com.nanlabs.trellomanagement.client;
 
 import com.nanlabs.trellomanagement.model.TO.CardTO;
 import com.nanlabs.trellomanagement.model.card.Card;
-import com.nanlabs.trellomanagement.model.card.CardList;
+import com.nanlabs.trellomanagement.model.card.CardTrelloBoardListId;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public interface TrelloClient {
 
     @PostMapping(path = "/card/")
-    Card insertCard(@RequestBody final CardTO card,
+    Card insertCard(@RequestBody final Card card,
                     final @RequestParam String idList,
                     final @RequestParam String key,
                     final@RequestParam String token );
@@ -28,7 +28,7 @@ public interface TrelloClient {
 
 
     @GetMapping(path = "/boards/{boardId}/lists")
-    List<CardList> getIdsBoards(final @PathVariable String boardId,
-                                final @RequestParam String key,
-                                final@RequestParam String token);
+    List<CardTrelloBoardListId> getIdsBoards(final @PathVariable String boardId,
+                                             final @RequestParam String key,
+                                             final@RequestParam String token);
 }
