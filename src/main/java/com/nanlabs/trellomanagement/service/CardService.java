@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class CardService<T> {
@@ -32,6 +34,9 @@ public class CardService<T> {
     @Autowired
     TrelloClient client;
 
+    private
+    Map<String, String> boardColumns;
+
     public void insertCard(T card) {
         Card request = cardFactory.getCard(card);
         String idList = getIdListFromType(request.getType());
@@ -43,23 +48,23 @@ public class CardService<T> {
     }
 
     private String getIdListFromType(String type){
-        // Por ahora no se me ocurrio nada mejor que preguntar por el tipo
-        // y asignarle un idList
-        String idList ="";
-        if(type.toLowerCase().equals("issue")){
-            idList = getBoardsIds().stream().filter(x -> x.getName().equals("To Do")).findFirst().get().getId();
+        // mejor, pero no logro zafar de algunos if
+        if(type.equals("issue")){
+            type = "to do";
         }
-        if(type.toLowerCase().equals("bug")){
-            idList = getBoardsIds().stream().filter(x -> x.getName().equals("Bug")).findFirst().get().getId();
+        if(getBoardsIds().containsKey(type)) {
+            return getBoardsIds().get(type);
+        } else{
+            throw new IllegalArgumentException();
         }
-        if(type.toLowerCase().equals("task")){
-            idList = getBoardsIds().stream().filter(x -> x.getName().equals("Task")).findFirst().get().getId();
-        }
-        return idList;
     }
-    private List<CardTrelloBoardListId> getBoardsIds(){
+    private Map<String, String> getBoardsIds(){
         List<CardTrelloBoardListId> idList = client.getIdsBoards(boardId, key, token);
-        return  idList;
+        boardColumns = new TreeMap<>();
+        for(CardTrelloBoardListId card: idList){
+            boardColumns.put(card.getName().toLowerCase(), card.getId());
+        }
+        return  boardColumns;
     }
 
 }
