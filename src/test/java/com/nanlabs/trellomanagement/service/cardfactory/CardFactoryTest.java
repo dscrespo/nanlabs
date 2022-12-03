@@ -5,11 +5,16 @@ import com.nanlabs.trellomanagement.model.card.CardBug;
 import com.nanlabs.trellomanagement.model.card.CardIssue;
 import com.nanlabs.trellomanagement.model.card.CardTask;
 import com.nanlabs.trellomanagement.model.mappers.Mappers;
+import com.nanlabs.trellomanagement.model.mappers.MappersImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.LinkedHashMap;
@@ -18,15 +23,15 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
-@Disabled
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith(MockitoExtension.class)
 public class CardFactoryTest {
 
     @InjectMocks
     private CardFactory cardFactory;
 
-    @MockBean
-    Mappers mappers;
+    @Spy
+    Mappers mappers = new MappersImpl();
 
     @BeforeAll
     public void beforeClass() {
